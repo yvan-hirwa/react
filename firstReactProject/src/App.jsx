@@ -1,18 +1,22 @@
+// import { useState } from 'react'
 import './App.css'
 
 function App() {
   const users = [
     {
+      id: 1,
       hobby: 'Football',
       name: 'Alex',
       age: 23
     },
     {
+      id: 2,
       hobby: 'Cooking',
       name: 'Eric',
       age: 22
     },
     {
+      id: 3,
       hobby: 'Coding',
       name: 'Trevor',
       age: 14
@@ -22,14 +26,15 @@ function App() {
     <div className="app-container">
       <h1>Hello React</h1>
 
-      {users.map(user => <Header hobby={user.hobby} name={user.name} age={user.age} />)}
+      {users.map(user => <Header key={user.id} person = {user} />)}
     </div>
   )
 }
 
-function Header({ hobby, name, age }){
+function Header({ person }){
+  const {name, hobby, age} = person
 
-  return <p>Hello, My name is: {name} and my hobby is: {hobby}. I am {age} years old, I was born in {2026-age}</p>
+  return <p>Hello, My name is: {name} and my hobby is: {hobby}. I am {age} years old, I was born in {2026 - age}</p>
 }
 
 export default App
