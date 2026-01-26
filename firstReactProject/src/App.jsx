@@ -26,12 +26,14 @@ function App() {
     <div className="app-container">
       <h1>Hello React</h1>
 
-      {users.map(user => <Header key={user.id} person = {user} > Secret message </Header>)}
+      {users.map((user, i) => i>1? 
+                              <Header key={user.id} person = {user} > Secret message </Header>
+                              : <Header key={user.id} person = {user} />)}
     </div>
   )
 }
 
-function Header({ person, children }){
+function Header({ person, children='No message provided' }){
   // person.name = 'Hacker' immutability of props
   const {name, hobby, age} = person
 
