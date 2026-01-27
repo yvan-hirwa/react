@@ -39,7 +39,7 @@ function Header({ person, children='No message provided' }){
 
   return (
   <p>
-    Hello, My name is: {name} and my hobby is: {hobby}. I am {age} years old, I was born in {2026 - age}
+    My name is: {name} and my hobby is: {hobby}. I am {age} years old, I was born in {2026 - age}
     message: {children}
   </p>
   )
