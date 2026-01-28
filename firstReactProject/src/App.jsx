@@ -1,5 +1,30 @@
-// import { useState } from 'react'
+import { useState } from 'react'
 import './App.css'
+
+
+function UserInfo({ person, setLikes }){
+  // const [userData, setUserData] = useState(person)
+
+  const {id, name, hobby, age, likes} = person
+
+  return (
+      <p>
+        My name is: {name} and my hobby is: {hobby}. I am {age} years old, I was born in {2026 - age}
+       <button onClick={() => setLikes(id)}>Like ❤️{likes}</button>
+       {/* <button onClick={()=> setUserData(prev => ({...prev, hobby: 'Programming'}))}>Change hobby</button> */}
+      
+      </p>
+  )
+}
+
+function Header({ children }){
+  
+  return (
+  <div> 
+      {children}
+  </div>
+  
+)}
 
 function App() {
   const users = [
@@ -7,42 +32,42 @@ function App() {
       id: 1,
       hobby: 'Football',
       name: 'Alex',
-      age: 23
+      age: 23,
+      likes: 0
     },
     {
       id: 2,
       hobby: 'Cooking',
       name: 'Eric',
-      age: 22
+      age: 22,
+      likes: 0
     },
     {
       id: 3,
       hobby: 'Coding',
       name: 'Trevor',
-      age: 14
+      age: 14,
+      likes: 0
     }
   ]
+
+  const[allUsers, setAllUsers] = useState(users)
+
+  function handleLike(id) {
+  setAllUsers(prevUsers => prevUsers.map(user => 
+    user.id === id ? { ...user, likes: user.likes + 1 } : user
+  ));
+}
   return (
     <div className="app-container">
       <h1>Hello React</h1>
 
-      {users.map((user, i) => i>1? 
-                              <Header key={user.id} person = {user} > Secret message </Header>
-                              : <Header key={user.id} person = {user} />)}
+      { allUsers.map( user =>  <Header key={user.id}> <UserInfo person = {user} setLikes ={handleLike} /> </Header> ) }
+
     </div>
   )
 }
 
-function Header({ person, children='No message provided' }){
-  // person.name = 'Hacker' immutability of props
-  const {name, hobby, age} = person
 
-  return (
-  <p>
-    My name is: {name} and my hobby is: {hobby}. I am {age} years old, I was born in {2026 - age}
-    message: {children}
-  </p>
-  )
-}
 
 export default App
