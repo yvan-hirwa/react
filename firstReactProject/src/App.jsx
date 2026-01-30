@@ -12,18 +12,18 @@ function App(){
   const [bakeryData, setBakeryData] = useState(initialBakery)
   const [cart, setCart] = useState([])
 
-  const cartTotal = cart.reduce((sum, cartItem)=> sum+= cartItem.price,0)
+  const cartTotal = cart.reduce((sum, cartItem)=> sum+= (cartItem.price*cartItem.count),0)
+  const cartCount = cart.reduce((total, items)=> total+=items.count,0)
 
-  function handleBuy(id){
+  function handleBuy(product){
     setBakeryData(prev =>
-      prev.map(product => 
-         product.id === id ? {...product, stock: Math.max(0, product.stock -1)}: product
+      prev.map(item => 
+         item.id === product.id ? {...item, stock: Math.max(0, item.stock -1)}: item
       )
     )
 
     setCart(prev => {
-    const selectedItem = bakeryData.find(item => item.id === id);
-    const index = prev.findIndex(item => item.id === id);
+    const index = prev.findIndex(item => item.id === product.id);
 
     if (index !== -1) {
       return prev.map((item, i) =>
@@ -32,7 +32,7 @@ function App(){
           : item
       );
     }
-    return [...prev, { ...selectedItem, count: 1 }];
+    return [...prev, { ...product, count: 1 }];
   });
 
   }
@@ -50,7 +50,7 @@ function App(){
         {bakeryData.map( product => <Storefront key= {product.id}> <ProductCard product={product} buy = {handleBuy} /> </Storefront>)}
       </div>
       <div>
-          <ShoppingCart cart ={cart} totalPrice={cartTotal}/>
+          <ShoppingCart cart ={cart} totalPrice={cartTotal} cartCount = {cartCount}/>
       </div>
     </div>
   )
@@ -58,16 +58,16 @@ function App(){
 }
 
 
-function ShoppingCart({cart, totalPrice}){
+function ShoppingCart({cart, totalPrice, cartCount}){
 
   return (
     <div>
-      <h3>Cart {cart.length} items</h3>
+      <h3>Cart {cartCount} items</h3>
         <div>
           {cart.map(cartItem => cartItem.count>1 ? <p key={cartItem.id}>{cartItem.itemName} X {cartItem.count}</p> 
                                                 : <p key={cartItem.id}>{cartItem.itemName}</p>)}                             
         </div>
-        {cart.length>0 ? <p><b>Total:</b> {totalPrice}</p> : <p></p> } 
+        {cart.length>0 ? <p><b>Total:</b> {totalPrice}</p> : null } 
     </div>
   )
 }
@@ -83,7 +83,7 @@ function Storefront({ children }){
 
 function ProductCard({ product, buy }){
 
-  const {id, itemName, price, stock} = product
+  const { itemName, price, stock} = product
 
   return (
 
@@ -91,7 +91,7 @@ function ProductCard({ product, buy }){
         <p>Name: {itemName}</p>
         <p>Price: {price}</p>
         <p>Stock: <StockDisplay stock= {stock}/></p>
-        <p>{stock >0 ? <button onClick={()=> buy(id)}>BUY</button> : <button>SOLD OUT</button> }</p>
+        <p>{stock >0 ? <button onClick={()=> buy(product)}>BUY</button> : <button disabled>SOLD OUT</button> }</p>
       </div>
       
   )
