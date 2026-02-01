@@ -23,16 +23,16 @@ function App(){
     )
 
     setCart(prev => {
-    const index = prev.findIndex(item => item.id === product.id);
+      const index = prev.findIndex(item => item.id === product.id);
 
-    if (index !== -1) {
-      return prev.map((item, i) =>
-        i === index
-          ? { ...item, count: item.count + 1 }
-          : item
-      );
-    }
-    return [...prev, { ...product, count: 1 }];
+      if (index !== -1) {
+        return prev.map((item, i) =>
+          i === index
+            ? { ...item, count: item.count + 1 }
+            : item
+        );
+      }
+      return [...prev, { ...product, count: 1 }];
   });
 
   }
