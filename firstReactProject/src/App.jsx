@@ -16,6 +16,9 @@ function App(){
   const cartCount = cart.reduce((total, items)=> total+=items.count,0)
 
   function handleBuy(product){
+    const inStock = bakeryData.find(item => item.id === product.id)
+    if(!inStock || inStock.stock === 0) return 
+
     setBakeryData(prev =>
       prev.map(item => 
          item.id === product.id ? {...item, stock: Math.max(0, item.stock -1)}: item
