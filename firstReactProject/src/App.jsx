@@ -1,4 +1,5 @@
 import { useState } from "react"
+import StatusBar from "./components/StatusBar.jsx"
 
 
 function App(){
@@ -48,6 +49,7 @@ function App(){
 
   return (
     <div>
+      <StatusBar />
       <button onClick={()=> handleRestock()}>Restock</button>
       <div>
         {bakeryData.map( product => <Storefront key= {product.id}> <ProductCard product={product} buy = {handleBuy} /> </Storefront>)}
