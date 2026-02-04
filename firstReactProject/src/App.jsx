@@ -1,5 +1,6 @@
 import { useState } from "react"
 import StatusBar from "./components/StatusBar.jsx"
+import LogOut from "./components/LogOut.jsx"
 
 
 function App(){
@@ -49,14 +50,15 @@ function App(){
 
   return (
     <div>
-      <StatusBar />
-      <button onClick={()=> handleRestock()}>Restock</button>
+      <LogOut/>
+      {/* <StatusBar /> */}
+      {/* <button onClick={()=> handleRestock()}>Restock</button>
       <div>
         {bakeryData.map( product => <Storefront key= {product.id}> <ProductCard product={product} buy = {handleBuy} /> </Storefront>)}
       </div>
       <div>
           <ShoppingCart cart ={cart} totalPrice={cartTotal} cartCount = {cartCount}/>
-      </div>
+      </div> */}
     </div>
   )
 
