@@ -22,8 +22,8 @@ function LiveClock() {
                     })}
         </h1>
         <p>Timezones: </p>
-        <button onClick={()=> setTimezone('local')}>Local</button>
-        <button onClick={()=> setTimezone('UTC')}>UTC</button>
+        <button onClick={()=> setTimezone('local')} disabled = {timezone === 'local'}>Local</button>
+        <button onClick={()=> setTimezone('UTC')}  disabled = {timezone === 'UTC'}>UTC</button>
     </div>
   )
 }
