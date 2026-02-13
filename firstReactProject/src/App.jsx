@@ -1,6 +1,7 @@
 import { useState } from "react"
 import StatusBar from "./components/StatusBar.jsx"
 import LogOut from "./components/LogOut.jsx"
+import UserLookUp from "./components/UserLookup.jsx"
 
 
 function App(){
@@ -50,7 +51,8 @@ function App(){
 
   return (
     <div>
-      <LogOut/>
+      {/* <LogOut/> */}
+      <UserLookUp/>
       {/* <StatusBar /> */}
       {/* <button onClick={()=> handleRestock()}>Restock</button>
       <div>
