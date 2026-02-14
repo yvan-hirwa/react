@@ -2,7 +2,8 @@ import { useState } from "react"
 import StatusBar from "./components/StatusBar.jsx"
 import LogOut from "./components/LogOut.jsx"
 import UserLookUp from "./components/UserLookup.jsx"
-
+import LiveClock from "./components/LiveClock.jsx"
+import ControlledInput from "./components/ControlledInput.jsx"
 
 function App(){
     const initialBakery = [
@@ -51,8 +52,10 @@ function App(){
 
   return (
     <div>
+      <ControlledInput />
+      {/* <LiveClock/> */}
       {/* <LogOut/> */}
-      <UserLookUp/>
+      {/* <UserLookUp/> */}
       {/* <StatusBar /> */}
       {/* <button onClick={()=> handleRestock()}>Restock</button>
       <div>

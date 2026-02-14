@@ -13,6 +13,16 @@ function LiveClock() {
 
   return (
     <div>
+        <ClockDisplay time = {time} timezone ={timezone} />
+        <p>Timezones: </p>
+        <TimezoneSelector timezone = {timezone}  setTimezone = {setTimezone}/>
+    </div>
+  )
+}
+
+
+function ClockDisplay({time, timezone}){
+    return (
         <h1>{time.toLocaleTimeString(undefined, {
                     hour: '2-digit',
                     minute: '2-digit',
@@ -21,11 +31,16 @@ function LiveClock() {
                     
                     })}
         </h1>
-        <p>Timezones: </p>
-        <button onClick={()=> setTimezone('local')} disabled = {timezone === 'local'}>Local</button>
-        <button onClick={()=> setTimezone('UTC')}  disabled = {timezone === 'UTC'}>UTC</button>
-    </div>
-  )
+    )
+}
+
+function TimezoneSelector({timezone, setTimezone}){
+    return(
+        <div>
+            <button onClick={()=> setTimezone('local')} disabled = {timezone === 'local'}>Local</button>
+            <button onClick={()=> setTimezone('UTC')}  disabled = {timezone === 'UTC'}>UTC</button>
+        </div>
+    )
 }
 
 export default LiveClock
