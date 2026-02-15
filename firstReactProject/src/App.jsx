@@ -4,6 +4,7 @@ import LogOut from "./components/LogOut.jsx"
 import UserLookUp from "./components/UserLookup.jsx"
 import LiveClock from "./components/LiveClock.jsx"
 import ControlledInput from "./components/ControlledInput.jsx"
+import LoginForm from "./components/LoginForm.jsx"
 
 function App(){
     const initialBakery = [
@@ -52,7 +53,8 @@ function App(){
 
   return (
     <div>
-      <ControlledInput />
+      <LoginForm ></LoginForm>
+      {/* <ControlledInput /> */}
       {/* <LiveClock/> */}
       {/* <LogOut/> */}
       {/* <UserLookUp/> */}
