@@ -60,21 +60,20 @@ function App() {
         })
       }
 
-      if(children === '='){
-        if(pendingOperator){
-          compute(pendingOperator)
+      if (children === '=') {
+        if (pendingOperator && !newInput) {
+          compute(pendingOperator, null)
         }
+        return
       }
   }
 
   function handleOp(op) {
-
     if (newInput && pendingOperator) {
       setPendingOperator(op)
       return
     }
 
-  
     if (!pendingOperator) {
       setAccumulator(Number(display))
       setPendingOperator(op)
@@ -82,29 +81,32 @@ function App() {
       return
     }
 
-    compute(op)
+    compute(pendingOperator, op)
   }
 
-  function compute(op){
+  function compute(opToApply, nextOp) {
     let result = 0
-    switch(op){
+
+    switch (opToApply) {
       case '÷':
         result = accumulator / Number(display)
-      break;
+        break
       case '+':
         result = accumulator + Number(display)
-      break;
+        break
       case '-':
         result = accumulator - Number(display)
-      break;
+        break
       case 'x':
         result = accumulator * Number(display)
-      break;
+        break
+      default:
+        return
     }
 
     setAccumulator(result)
     setDisplay(String(result))
-    setPendingOperator(op)
+    setPendingOperator(nextOp)   
     setNewInput(true)
   }
   return (
