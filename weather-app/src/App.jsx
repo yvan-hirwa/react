@@ -5,7 +5,7 @@ import Search from "./components/Search"
 function App() {
 
   const [input, setInput] = useState('')
-  const [error, setError] = useState(null)
+  const [loading, SetLoading] = useState(false)
 
   return (
     <div className="h-screen w-screen relative">
@@ -16,7 +16,7 @@ function App() {
 
       <div className="absolute inset-0 h-full w-full flex flex-col justify-center items-center gap-5">
         <Search input={input} inputHandler = {setInput}/>
-        <CurrentWeather error= {error}/>
+        <CurrentWeather loading= {loading}/>
       </div>
     </div>
   )
