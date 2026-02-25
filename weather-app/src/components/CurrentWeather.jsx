@@ -7,12 +7,12 @@ export default function CurrentWeather({loading, error, weather}) {
     <div className="h-70 w-md relative rounded-2xl shadow-sm">
         <div className="absolute inset-0 h-full w-full bg-white opacity-10 rounded-2xl backdrop-blur-2xl"></div>
         <div className="absolute inset-0 h-full w-full flex flex-col justify-center items-center">
-          {error
-            ? <WeatherError error = {error}/>
-
-            :  loading 
-
+          {loading
             ? <LoadingSpinner />
+
+            :  error
+
+            ? <WeatherError error = {error}/>
             : <CurrentData weather = {weather}/>
           }
             

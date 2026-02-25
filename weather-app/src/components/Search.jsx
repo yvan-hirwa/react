@@ -8,6 +8,7 @@ export default function Search({input, inputHandler, handleSearch}) {
             placeholder="Enter City"
             value={input}
             onChange={e => inputHandler(e.target.value)}
+            onKeyDown={e => e.key === 'Enter'? handleSearch(): ''}
         />
         <button
             className="absolute right-0 top-1/2 -translate-y-1/2 mr-0 bg-blue-900/90 hover:bg-blue-900 text-white w-30 h-10 font-google font-semibold rounded-r-3xl cursor-pointer "

@@ -1,4 +1,4 @@
-import windIcon from '../assets/wind.png'
+import windIcon from '../assets/icons/wind.png'
 
 export default function WeatherError({error}) {
   return (
@@ -8,7 +8,7 @@ export default function WeatherError({error}) {
         </div>
         <div>
             <h1 className='font-google font-semibold text-white text-lg'>
-                {error}
+                {error.message}
             </h1>
         </div>
     </div>
