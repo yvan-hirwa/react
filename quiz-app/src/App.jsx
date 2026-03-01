@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import StartScreen from "./components/StartScreen";
 import QuizScreen from "./components/QuizScreen";
 import ScoreScreen from "./components/ScoreScreen";
+import LoadingScreen from "./components/LoadingScreen";
 
 function App() {
   const [hasQuizStarted, setHasQuizStarted] = useState(false);
@@ -9,14 +10,23 @@ function App() {
   const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quiz, setQuiz] = useState([]);
+  const [params, setParams] = useState({
+    category: "",
+    difficulty: "",
+    type: "",
+  });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (!hasQuizStarted) return;
+
+    setLoading(true);
     const controller = new AbortController();
 
     async function fetchQuiz() {
       try {
         const getObj = await fetch(
-          "https://opentdb.com/api.php?amount=10&category=18&type=multiple",
+          `https://opentdb.com/api.php?amount=10${params.category ? "&category=params.category" : ""}${params.difficulty ? "&difficulty=params.difficulty" : ""}${params.type ? "&type=params.type" : ""}`,
           { signal: controller.signal },
         );
 
@@ -28,15 +38,17 @@ function App() {
         if (error.name !== "AbortError") {
           console.log(error.message);
         }
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchQuiz();
 
     return () => controller.abort();
-  }, []);
-  // console.log(quiz);
-  // console.log(selectedAnswer);
+  }, [hasQuizStarted]);
+
+  console.log(quiz);
 
   function handleChoice(e) {
     setSelectedAnswer(e.target.value);
@@ -52,10 +64,21 @@ function App() {
     setCurrentQuestionIndex(0);
     setScore(0);
   }
+  function nextQuiz() {
+    setHasQuizStarted(false);
+    setCurrentQuestionIndex(0);
+    setScore(0);
+  }
   return (
     <div className="bg-[#0a0a0f] h-screen w-screen flex justify-center items-center">
       {!hasQuizStarted ? (
-        <StartScreen hasQuizStarted={setHasQuizStarted} />
+        <StartScreen
+          hasQuizStarted={setHasQuizStarted}
+          params={params}
+          setParams={setParams}
+        />
+      ) : loading ? (
+        <LoadingScreen />
       ) : currentQuestionIndex < quiz.length ? (
         <QuizScreen
           quiz={quiz}
@@ -65,7 +88,7 @@ function App() {
           handleNext={handleNext}
         />
       ) : (
-        <ScoreScreen score={score} tryagain={tryagain} />
+        <ScoreScreen score={score} tryagain={tryagain} nextQuiz={nextQuiz} />
       )}
     </div>
   );
