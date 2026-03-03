@@ -26,13 +26,19 @@ function App() {
     async function fetchQuiz() {
       try {
         const getObj = await fetch(
-          `https://opentdb.com/api.php?amount=10${params.category ? "&category=params.category" : ""}${params.difficulty ? "&difficulty=params.difficulty" : ""}${params.type ? "&type=params.type" : ""}`,
+          `https://opentdb.com/api.php?amount=10${
+            params.category ? `&category=${params.category}` : ""
+          }${params.difficulty ? `&difficulty=${params.difficulty}` : ""}${
+            params.type ? `&type=${params.type}` : ""
+          }`,
           { signal: controller.signal },
         );
 
         if (!getObj.ok) throw new Error("Can't fetch quiz");
 
         const quizObj = await getObj.json();
+        if (!quizObj.results?.length)
+          throw new Error("No questions returned for these settings");
         setQuiz(quizObj.results);
       } catch (error) {
         if (error.name !== "AbortError") {
