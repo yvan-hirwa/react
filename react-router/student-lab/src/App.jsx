@@ -1,7 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import Students from "./pages/Students";
+import StudentsLayout from "./layouts/StudentsLayout";
+import StudentsList from "./pages/StudentsList";
+import NewStudent from "./pages/NewStudent";
+import StudentProfile from "./pages/StudentProfile";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -10,7 +14,12 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/students" element={<Students />} />
+        <Route path="/students" element={<StudentsLayout />}>
+          <Route index element={<StudentsList />} />
+          <Route path="new" element={<NewStudent />} />
+          <Route path=":id" element={<StudentProfile />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
