@@ -1,3 +1,13 @@
+import { useParams } from "react-router-dom";
+
 export default function StudentProfile() {
-  return <div>StudentProfile</div>;
+  const { id } = useParams();
+
+  return (
+    <div>
+      <h1>Student Profile</h1>
+
+      <p>Students ID : {id}</p>
+    </div>
+  );
 }
