@@ -1,4 +1,6 @@
-import Question4 from "./customHook/Question4";
+// import { useEffect } from "react";
+import ContextApp from "./context1/ContextApp";
+// import Question4 from "./customHook/Question4";
 // import Question3 from "./fetchPost/Question3";
 // import Question2 from "./list-optimization/Question2";
 
@@ -7,7 +9,8 @@ function App() {
     <>
       {/* <Question2 /> */}
       {/* <Question3 /> */}
-      <Question4 />
+      {/* <Question4 /> */}
+      {/* <ContextApp /> */}
     </>
   );
 }
