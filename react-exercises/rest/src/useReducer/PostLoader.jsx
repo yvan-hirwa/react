@@ -1,4 +1,4 @@
-import { useCallback, useReducer } from "react";
+import { useReducer } from "react";
 
 export default function PostLoader() {
   function reducer(state, action) {
@@ -20,7 +20,7 @@ export default function PostLoader() {
     error: null,
   });
 
-  const loadPosts = useCallback(async () => {
+  const loadPosts = async () => {
     dispatch({ type: "FETCH_START" });
     try {
       const post = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -30,7 +30,7 @@ export default function PostLoader() {
     } catch (error) {
       dispatch({ type: "FETCH_ERROR", payload: error.message });
     }
-  }, []);
+  };
 
   return (
     <div>
