@@ -1,9 +1,11 @@
 // import { useEffect } from "react";
-import ContextApp from "./context1/ContextApp";
-import DarkMode from "./darkmode/DarkMode";
+// import ContextApp from "./context1/ContextApp";
+// import DarkMode from "./darkmode/DarkMode";
 // import Question4 from "./customHook/Question4";
 // import Question3 from "./fetchPost/Question3";
 // import Question2 from "./list-optimization/Question2";
+
+import PostLoader from "./useReducer/PostLoader";
 
 function App() {
   return (
@@ -12,7 +14,8 @@ function App() {
       {/* <Question3 /> */}
       {/* <Question4 /> */}
       {/* <ContextApp /> */}
-      <DarkMode />
+      {/* <DarkMode /> */}
+      <PostLoader />
     </>
   );
 }
