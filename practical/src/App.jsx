@@ -1,7 +1,13 @@
-import React from "react";
+import NameTransferLists from "./components/NameTransferLists";
+import ProductList from "./components/ProductList";
 
 function App() {
-  return <div>App</div>;
+  return (
+    <>
+      {/* <ProductList /> */}
+      <NameTransferLists />
+    </>
+  );
 }
 
 export default App;
