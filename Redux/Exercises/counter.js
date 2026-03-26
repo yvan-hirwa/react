@@ -1,6 +1,6 @@
 const initialState = { count: 0 };
 
-function counterReducer(state = initialState, action) {
+export function counterReducer(state = initialState, action) {
   switch (action.type) {
     case "INCREMENT":
       return { count: state.count + action.payload };
@@ -11,9 +11,9 @@ function counterReducer(state = initialState, action) {
   }
 }
 
-function createStore(reducer) {
+export function createStore(reducer) {
   let state;
-  const listeners = [];
+  let listeners = [];
 
   state = reducer(state, { type: "", payload: 0 });
 
@@ -24,19 +24,22 @@ function createStore(reducer) {
       listeners.forEach((listener) => listener(state));
       return;
     },
-    subscribe: (listener) => listeners.push(listener),
+    subscribe: (listener) => {
+      listeners.push(listener);
+      return () => (listeners = listeners.filter((item) => item !== listener));
+    },
   };
 }
 
-function logState(state) {
-  console.log(state);
-}
-const store = createStore(counterReducer);
-store.subscribe(logState);
+// function logState(state) {
+//   console.log(state);
+// }
+// const store = createStore(counterReducer);
+// store.subscribe(logState);
 
-store.dispatch({ type: "INCREMENT", payload: 8 });
-store.dispatch({ type: "DECREMENT", payload: 6 });
-store.dispatch({ type: "INCREMENT", payload: 3 });
-store.dispatch({ type: "DECREMENT", payload: 5 });
-store.dispatch({ type: "INCREMENT", payload: 8 });
-store.dispatch({ type: "DECREMENT", payload: 2 });
+// store.dispatch({ type: "INCREMENT", payload: 8 });
+// store.dispatch({ type: "DECREMENT", payload: 6 });
+// store.dispatch({ type: "INCREMENT", payload: 3 });
+// store.dispatch({ type: "DECREMENT", payload: 5 });
+// store.dispatch({ type: "INCREMENT", payload: 8 });
+// store.dispatch({ type: "DECREMENT", payload: 2 });
