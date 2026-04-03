@@ -1,5 +1,11 @@
+import NameTransferLists from "./practicals/NameTransferLists";
+
 function App() {
-  return <div>App</div>;
+  return (
+    <div>
+      <NameTransferLists />
+    </div>
+  );
 }
 
 export default App;
