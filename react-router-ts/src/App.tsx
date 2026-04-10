@@ -6,6 +6,7 @@ import ProductsPage from "./practicals/ProductsPage";
 import ProductDetailsPage from "./practicals/ProductDetailsPage";
 import { AuthContext } from "./practicals/authContext";
 import { useState } from "react";
+// import SearchParam from "./practicals/SearchParam";
 
 function App() {
   const [isLoggedin, setIsLoggedin] = useState(false);
@@ -15,6 +16,7 @@ function App() {
       <AuthContext.Provider value={{ isLoggedin, setIsLoggedin }}>
         <Routes>
           <Route path="/" element={<ProductsPage />} />
+          {/* <Route path="/" element={<SearchParam />} /> */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/details/:id" element={<ProductDetailsPage />} />
         </Routes>
